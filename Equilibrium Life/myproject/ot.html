@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Emociones</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #eafaf1;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #1b5e20;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .option-group {
+            margin-bottom: 20px;
+        }
+
+        .option-group input {
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #66bb6a;
+            color: #ffffff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #57a05b;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f1f8e9;
+            border-left: 5px solid #8bc34a;
+            font-weight: bold;
+            color: #33691e;
+            display: none;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 20px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test de Emociones</h1>
+        <form id="emotionTest">
+            <div class="option-group">
+                <label>1. ¿Cómo te sientes al despertar en las mañanas?</label>
+                <input type="radio" name="q1" value="1"> No tengo ganas de levantarme.<br>
+                <input type="radio" name="q1" value="2"> Me siento neutral, simplemente empiezo el día.<br>
+                <input type="radio" name="q1" value="3"> Me siento emocionado por comenzar el día.
+            </div>
+
+            <div class="option-group">
+                <label>2. ¿Cómo te sientes cuando estás con amigos o familiares?</label>
+                <input type="radio" name="q2" value="1"> Me siento distante y desconectado.<br>
+                <input type="radio" name="q2" value="2"> Me siento bien, pero sin emociones fuertes.<br>
+                <input type="radio" name="q2" value="3"> Me siento feliz y disfruto mucho del momento.
+            </div>
+
+            <div class="option-group">
+                <label>3. ¿Cómo manejas los desafíos o problemas?</label>
+                <input type="radio" name="q3" value="1"> Me siento abrumado y sin motivación.<br>
+                <input type="radio" name="q3" value="2"> Hago lo que puedo, sin mucho entusiasmo.<br>
+                <input type="radio" name="q3" value="3"> Veo los desafíos como oportunidades para crecer.
+            </div>
+
+            <div class="option-group">
+                <label>4. ¿Cómo describirías tu nivel de energía durante el día?</label>
+                <input type="radio" name="q4" value="1"> Me siento cansado y sin energía.<br>
+                <input type="radio" name="q4" value="2"> Tengo energía, pero fluctúa durante el día.<br>
+                <input type="radio" name="q4" value="3"> Me siento lleno de energía y motivado.
+            </div>
+
+            <div class="option-group">
+                <label>5. ¿Cómo te sientes al final del día?</label>
+                <input type="radio" name="q5" value="1"> Me siento insatisfecho y desanimado.<br>
+                <input type="radio" name="q5" value="2"> Me siento neutral, ni bien ni mal.<br>
+                <input type="radio" name="q5" value="3"> Me siento satisfecho y en paz.
+            </div>
+
+            <button type="button" onclick="calculateEmotion()">Enviar</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateEmotion() {
+            let totalPoints = 0;
+            
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+            const q3 = document.querySelector('input[name="q3"]:checked');
+            const q4 = document.querySelector('input[name="q4"]:checked');
+            const q5 = document.querySelector('input[name="q5"]:checked');
+
+            if (!q1 || !q2 || !q3 || !q4 || !q5) {
+                alert('Por favor, responde todas las preguntas.');
+                return;
+            }
+
+            totalPoints = parseInt(q1.value) + parseInt(q2.value) + parseInt(q3.value) + parseInt(q4.value) + parseInt(q5.value);
+            
+            let emotion = "";
+            if (totalPoints <= 8) {
+                emotion = "Triste";
+            } else if (totalPoints <= 12) {
+                emotion = "Intermedio";
+            } else {
+                emotion = "Alegre";
+            }
+            
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerText = "Tu estado emocional es: " + emotion;
+            resultDiv.style.display = "block";
+        }
+    </script>
+</body>
+</html>

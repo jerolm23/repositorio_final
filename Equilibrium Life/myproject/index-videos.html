@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Videos</title>
+
+    <!--Estilos front-end-->
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="images/icono ventana.png" type="image/gif" />
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/jquery.fancybox.min.css" media="screen">
+    <link rel="stylesheet" href="css/style libreria.css">
+    <link rel="stylesheet" href="C:\Users\USUARIO\Desktop\SISTEMA EQUILIBRIUM LIFE\Equilibrium Life\myproject\css\index-videos.css">
+    
+    <!--Customizacion Scroollbar-->
+    <link rel="stylesheet" href="css/scrollbar-colorblue.css">
+
+    <style>
+       body {
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+          margin: 0;
+       }
+       .content-container {
+          display: flex;
+          flex-grow: 1;
+       }
+       .nav-panel {
+          height: 100%;
+          width: 250px;
+          background-color: #111;
+          padding-top: 20px;
+          flex-shrink: 0;
+       }
+       .nav-panel a {
+          padding: 10px 15px;
+          text-decoration: none;
+          font-size: 18px;
+          color: #818181;
+          display: block;
+       }
+       .nav-panel a:hover {
+          color: #f1f1f1;
+       }
+       .main-content {
+          padding: 20px;
+          width: 100%;
+       }
+       .content-section {
+          display: none;
+       }
+
+    </style>
+    
+</head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Videos</title>
+
+    <!--Estilos front-end-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="images/icono ventana.png" type="image/gif" />
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/jquery.fancybox.min.css" media="screen">
+    <link rel="stylesheet" href="css/style libreria.css">
+    <link rel="stylesheet" href="\css\index-videos.css">
+    
+    <!--Customizacion Scroollbar-->
+    <link rel="stylesheet" href="css/scrollbar-colorblue.css">
+   <link rel="stylesheet" href="cssChatBot.css">
+    <style>
+       body {
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+          margin: 0;
+       }
+       .content-container {
+          display: flex;
+          flex-grow: 1;
+       }
+       .nav-panel {
+          height: 100%;
+          width: 250px;
+          background-color: #111;
+          padding-top: 20px;
+          flex-shrink: 0;
+       }
+       .nav-panel a {
+          padding: 10px 15px;
+          text-decoration: none;
+          font-size: 18px;
+          color: #818181;
+          display: block;
+       }
+       .nav-panel a:hover {
+          color: #f1f1f1;
+       }
+       .main-content {
+          padding: 20px;
+          width: 100%;
+       }
+       .content-section {
+          display: none;
+       }
+       .video-section {
+            display: contents;
+        }
+       
+        .video{
+         width: 720px;
+         margin-bottom: 10px;
+         margin-right: 50px;
+         margin-left: 50px;
+         border-radius: 10px;
+         border: solid 6px #000000;
+        }
+        .conte{
+         padding: 20px;
+         width: 100%;
+         margin: 0 auto;
+         background-color: #d6ffc5;
+         
+
+        }
+        .type{
+            font-size: 24px;
+            padding: 3px 35px;
+            display: block;
+       }
+      .video-section{
+         text-align: center;
+         
+       }
+       .containerB{
+         display: flex;
+         justify-content: center;
+         flex-wrap: wrap;
+         margin-bottom: 30px;
+         
+       }
+       .containerB button{
+         margin-left: 20px;
+       }
+       .videos{
+         display: flex;
+         justify-content: space-around;
+         flex-wrap: wrap;
+         gap: 10px;
+       }
+       .estadoContainer{
+	      display:flex;
+	      justify-content:space-around;
+      }
+      .estadoContainer .estado{
+	      display:flex;
+	      flex-direction:column;
+	      align-items:center;
+         box-shadow: 1px 1px 5px black;
+         border-radius: 5px;
+         padding: 8px;
+      }
+      .estadoContainer .estado:hover{
+         cursor: pointer;
+         opacity: 0.8;
+         box-shadow: 1px 1px 10px black;
+      }
+      .estadoContainer .estado *{
+         font-size: 25px;
+      }
+      .videosPersonalizados{
+         display: flex;
+         justify-content: center;
+         gap: 20px;
+         flex-wrap: wrap;
+      }
+      .videosPersonalizadosContainer{
+         margin: 20px 0;
+      }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header">
+           <div class="container">
+              <div class="row">
+                 <div class="col-md-12 col-sm-3 col logo_section">
+                    <div class="full">
+                       <div class="center-desk">
+                          <div class="logo">
+                             <a href="index.html"><img src="images/icono ventana.png" alt="#" /></a>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="col-md-10 offset-md-1">
+                    <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                       <span class="navbar-toggler-icon"></span>
+                       </button>
+                       <div class="collapse navbar-collapse" id="navbarsExample04">
+                          <ul class="navbar-nav mr-auto">
+                             <li class="nav-item active">
+                                <a class="nav-link" href="index.html">INICIO</a>
+                             </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="about.html">ACERCA</a>
+                             </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="service.html">SERVICIOS</a>
+                             </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="gallery.html">GALERIA</a>
+                             </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="testimonial.html">MULTIMEDIA</a>
+                             </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="contact.html">CONTACTANOS</a>
+                             </li>
+                             <li class="nav-item">
+                              <a class="nav-link" href="actualizar.html">PERFIL</a>
+                           </li>
+                          </ul>
+                       </div>
+                    </nav>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </header>
+    <!-- Sección de videos -->
+
+    <div class="conte">
+      <section class="video-section">
+
+         <div class="containerB">
+            <button type="button" data-type="espiritual" class="type">Espiritual</button>
+            <button type="button" data-type="mental" class="type">Mental</button>
+            <button type="button" data-type="personal" class="type">Personal</button>
+         </div>
+
+         <h1 id="title"></h1>
+
+      </section>
+      <div class="videos">
+            
+      </div>
+
+   </div>
+
+   <div class="videosPersonalizadosContainer">
+
+      <div class="estadoContainer">
+         <div class="estado" data-key="1"><p data-key="1">😔</p><h3 data-key="1">Triste</h3></div>
+         <div class="estado" data-key="2"><p data-key="2">😐</p><h3 data-key="2">Estable</h3></div>
+         <div class="estado" data-key="3"><p data-key="3">😄</p><h3 data-key="3">Feliz</h3></div>
+      </div>
+
+      <div class="videosPersonalizados">
+
+      </div>
+
+   </div>
+   <div class="burbuja-chat" onclick="toggleChat()">💬</div>
+   <div class="ventana-chat" id="ventana-chat">
+       <div class="cabecera-chat">Green</div>
+       <div class="contenido-chat" id="contenido-chat">
+           <div class="mensaje-predeterminado respuesta-bot">
+               Green: ¡Hola! Soy Green, tu asistente virtual. <br><br>
+               ¿Cuál es tu estado de ánimo? <br>
+               1. Depresivo <br>
+               2. Ansioso <br>
+               3. Desesperado <br>
+               4. Nostálgico <br>
+               5. Impulsivo
+           </div>
+       </div>
+       <div class="contenedor-input-chat">
+           <input type="text" id="entrada-usuario" class="input-chat" placeholder="Escribe tu mensaje..." onkeydown="comprobarEnter(event)">
+           <button class="boton-chat" onclick="enviarMensaje()">Enviar</button>
+       </div>
+       <button class="boton-limpiar" onclick="limpiarChat()">Borrar Conversación</button>
+   </div>
+    <!--footer-->
+    <footer>
+      <div class="footer">
+         <div class="container">
+            <div class="row">
+               <div class=" col-md-3 col-sm-6">
+                  <h3>Para que impulses</h3>
+                  <p class="variat pad_roght2">
+                     tu crecimiento personal,
+                     espiritual y mental,
+                     nunca dudes en EQUILIBRIUM LIFE.
+                  </p>
+               </div>
+               <div class=" col-md-3 col-sm-6">
+                  <h3>¿Como podemos ayudarte?</h3>
+                  <p  class="variat pad_roght2">Comunicate con nosotros por 
+                     numero telefonico al +57 312 6058545 o al correo equilibriumlifeparati@gmail.com
+                  </p>
+               </div>
+               <div class="col-md-3 col-sm-6">
+                  <h3>INFORMACION</h3>
+                  <ul class="link_menu">
+                     <li><a href="index.html">INICIO</a></li>
+                     <li><a href="about.html"> ACERCA DE</a></li>
+                     <li><a href="service.html">SERVICIOS</a></li>
+                     <li><a href="gallery.html">GALERIA</a></li>
+                     <li><a href="testimonial.html">MULTIMEDIA</a></li>
+                     <li><a href="template/contact.html">CONTACTANOS</a></li>
+                  </ul>
+               </div>
+               <div class="col-md-3 col-sm-6">
+                  
+                  <p  class="variat"> EQUILIBRIUM LIFE 2024.</p>
+               </div>
+            </div>
+         </div>
+         <div class="copyright">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-10 offset-md-1">
+                     <p>© 2024 Todos los derechos reservados.</a></p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery-3.0.0.min.js"></script>
+
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="login/controlarAcceso.js"></script>
+<script src="js/logicaVideos.js"></script>
+<script src="js/logicaChatBot.js"></script>
+</html>

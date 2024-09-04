@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .masculino{
+        box-shadow: -3px 5px 10px black;
+        border-radius: 5px;
+        flex-grow: 1;
+        padding: 20px 0;
+    }
+    .femenino{
+        flex-grow: 1;
+        box-shadow: 3px 5px 10px black;
+        border-radius: 5px;
+        padding: 20px 0;
+    }
+    .titulo{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        padding: 0;       
+    }
+    .titulo *{
+        margin: 0;
+    }
+    .container{
+        display: flex;
+        gap: 5px;
+        width: 80%;
+    }
+    .estadistica{
+        text-align: center;
+        font-size: 1.2rem;
+    }
+    .container div{
+        background-color: rgb(243, 242, 242);
+    }
+    body{
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    button{
+        background-color: rgb(168, 168, 168);
+        font-size: 1.15rem;
+        padding: 5px;
+        width: 10%;
+        border: none;
+        border-radius: 5px;
+        padding: 0;
+    }
+    button:hover{
+        cursor: pointer;
+        opacity: 0.9;
+    }
+    button a{
+        display: block;
+        color: black;
+        text-decoration: none;
+        padding: 5px 0;
+    }
+</style>
+<body>
+    <div class="container">
+
+        <div class="masculino">
+
+            <div class="titulo">
+                <h2>Masculino</h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"/>
+                  </svg>
+            </div>    
+
+            <div class="estadistica estadisticaMasculino">
+                <div class="triste">
+                    Triste 😔: <span></span>
+                </div>
+                <div class="estable">
+                    Estable 😐: <span></span>
+                </div>
+                <div class="feliz">
+                    Feliz 😄: <span></span>
+                </div>
+            </div>
+
+        </div>
+    
+        <div class="femenino">
+
+            <div class="titulo">
+                <h2>Femenino</h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-gender-female" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8M3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5"/>
+                  </svg>
+            </div>
+
+            <div class="estadistica estadisticaFemenino">
+                <div class="triste">
+                    Triste 😔: <span></span>
+                </div>
+                <div class="estable">
+                    Estable 😐: <span></span>
+                </div>
+                <div class="feliz">
+                    Feliz 😄: <span></span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <button><a href="index.html">Volver</a></button>    
+
+</body>
+<script src="js/jquery-3.7.1.js"></script>
+<script>
+    $(document).ready(function(){
+        const retrieveData=async()=>{
+            let response=await fetch("http://localhost:5000/estadisticas");
+            let bodyResponse=await response.json();
+            bodyResponse.masculino.forEach( value=>{
+                $(".estadisticaMasculino ."+value[0]+" span").text(value[1]);
+            } );
+            bodyResponse.femenino.forEach(value=>{
+                $(".estadisticaFemenino ."+value[0]+" span").text(value[1]);
+            });
+        };
+        retrieveData();
+    });
+</script>
+</html>

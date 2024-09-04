@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+    body {
+    background-image: url("https://cdn.pixabay.com/photo/2019/02/21/14/09/handshake-4011419_1280.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100vh;
+    font-family: Arial, sans-serif;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+form {
+    background-color: #e0f2f1; 
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #b2dfdb; 
+    border-radius: 4px;
+    background-color: #fff; 
+    color: #333; 
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #000000;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #2bbbad;
+}
+
+#mensaje {
+    margin-top: 20px;
+    color: white; 
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+}
+
+</style>
+<body>
+    <form action="">
+        <input type="text" id="usuario" placeholder="Nombre Usuario">
+        <input type="password" id="contrasena" placeholder="Contraseña">
+        <input type="submit">
+    </form>
+    <p id="mensaje"></p>
+</body>
+<script src="js/jquery-3.7.1.js"></script>
+<script>
+    $(document).ready(function(){
+        $("form").submit(function(e){
+            e.preventDefault();
+            if($("#usuario").val()=="" || $("#contrasena").val()=="") return $("#mensaje").text("Rellenar Todos los campos");
+            if($("#usuario").val()!="jeroDiegoSimonManuela2024" || $("#contrasena").val()!="stalg") return $("#mensaje").text("Credenciales incorrectas");
+            sessionStorage.setItem("admin",true);
+            window.location.href="index.html";
+        });
+    });
+</script>
+</html>

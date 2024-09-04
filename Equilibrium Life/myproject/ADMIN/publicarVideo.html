@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        display: flex;
+        height: 100vh;
+        flex-direction: column;
+        justify-content: center;
+        background-image: url("https://cdn.pixabay.com/photo/2015/07/02/09/52/meeting-room-828547_1280.jpg");
+        background-repeat: no-repeat;
+        background-size: 100% 100vh;
+    }
+    form {
+    background-color: #e0f2f1;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+label {
+    font-size: 16px;
+    color: #004d40;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+input[type="file"],
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #b2dfdb;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+}
+
+h1 {
+    color: #131716;
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+textarea {
+    height: 100px;
+}
+
+input[type="submit"] {
+    background-color: #000000;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+}
+
+input[type="submit"]:hover {
+    background-color: #2bbbad;
+}
+
+#mensaje{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+
+}
+
+</style>
+<body>
+    <form action="">
+        <label for="">Video: </label><input type="file" id="video" accept="video/*">
+        <label for="">Estado de emoción: </label>
+        <select name="" id="tipoEmocion">
+            <option value="1">Triste</option>
+            <option value="2">Estable</option>
+            <option value="3">Feliz</option>
+        </select>
+        <br>
+        <h1>Datos de correo</h1>
+        <label for="">Asunto: </label><input type="text" placeholder="Asunto" value="Nuevo Video Subido" id="asunto"><br><br>
+        <label for="">Descripción: </label><br><textarea name="" id="descr" placeholder="Descripcion"></textarea><br><br>
+        <input type="submit" name="" id="" value="CARGAR VIDEO">
+    </form>
+    <p id="mensaje"></p>
+</body>
+<script src="js/jquery-3.7.1.js"></script>
+<script>
+    $(document).ready(function(){
+        if(sessionStorage.getItem("admin")==undefined){
+            window.location.href="login.html";
+        }
+    $("form").submit(function(e){
+        e.preventDefault();
+        let file=document.querySelector("#video").files[0];
+        if(file==undefined) return $("#mensaje").text("Debe seleccionar un video !!!!!");
+        if($("#asunto").val()=="" || $("#descr").val()=="") return $("#mensaje").text("Debe detallar el correo !!!!!");
+        let dataForm=new FormData();
+        dataForm.append("infoFile",file);
+        dataForm.append("subject",$("#asunto").val());
+        dataForm.append("message", $("#descr").val());
+        dataForm.append("estado",document.querySelector("#tipoEmocion").value);
+        uploadVideo(dataForm).then(res=>{
+            $("#mensaje").text("Video subido correctamente !!!");
+            setTimeout(()=>{
+                document.location.href="index.html";
+            },2000);
+        });
+    });
+    });
+    const uploadVideo=async(data)=>{
+        try{
+            let response=await fetch("http://localhost:5000/subirVideo",{method:"POST",body:data});
+            return;
+        }catch(err){
+            console.log(err.message);
+            return;
+        }
+    };
+</script>
+</html>

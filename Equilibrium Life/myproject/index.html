@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <title>EQUILIBRIUM LIFE</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="css/responsive.css">
+      <link rel="icon" href="images/icono ventana.png" type="image/gif" />
+      <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+
+      <style>
+        
+        .burbuja-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: black;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+            animation: bounce 0.5s infinite alternate;
+        }
+
+        .burbuja-chat:hover {
+            opacity: 0.8;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        .ventana-chat {
+            display: none;
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 350px;
+            max-height: 500px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            flex-direction: column;
+            transition: all 0.3s;
+            opacity: 0; 
+            transform: translateY(20px);
+        }
+
+        .ventana-chat.mostrar {
+            display: flex;
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        .cabecera-chat {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            font-size: 1.2em;
+        }
+
+        .contenido-chat {
+            padding: 15px;
+            height: 350px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+
+        .contenedor-input-chat {
+            display: flex;
+            padding: 10px;
+            background-color: #ffffff;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-chat {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin-right: 10px;
+            font-size: 1em;
+        }
+
+        .boton-chat {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .boton-chat:hover {
+            background-color: #0056b3;
+        }
+
+        .boton-limpiar {
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .boton-limpiar:hover {
+            background-color: #c82333;
+        }
+
+        .mensaje-usuario, .respuesta-bot {
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px 0;
+            max-width: 80%;
+            position: relative;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            opacity: 0; 
+            transform: translateY(10px); 
+        }
+
+        .mensaje-usuario {
+            background-color: #d1e7dd;
+            align-self: flex-end;
+            border: 1px solid #b2d8b2;
+        }
+
+        .respuesta-bot {
+            background-color: #cfe2ff;
+            align-self: flex-start;
+            border: 1px solid #a1c6ff;
+        }
+
+        .mensaje-predeterminado {
+            background-color: #cfe2ff; 
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px 0;
+            max-width: 80%;
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        .mensaje {
+            display: flex;
+            margin: 5px 0;
+        }
+
+        .mensaje-info {
+            background-color: #e0f7fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border: 1px solid #b2ebf2;
+            font-size: 1em;
+            color: #00796b;
+            text-align: justify; 
+            line-height: 1.5; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .formularioEmocional {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #ffffff;
+            z-index: 10000;
+            overflow: scroll;
+            text-align: center;
+            padding: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #1b5e20;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .option-group {
+            margin-bottom: 20px;
+        }
+
+        .option-group input {
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #66bb6a;
+            color: #ffffff;
+            border: none;
+            padding: 12px 20px;
+            margin: auto;
+            cursor: pointer;
+            font-size: 16px;
+            width: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #57a05b;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f1f8e9;
+            border-left: 5px solid #8bc34a;
+            font-weight: bold;
+            color: #33691e;
+            display: none;
+            width: 50%;
+            margin: 15px auto;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 20px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+        }
+      </style>
+
+   </head>
+   <body class="main-layout">
+      <div class="loader_bg">
+         <div class="loader"><img src="images/loading.gif" alt="#"/></div>
+      </div>
+
+      <header>
+         <div class="header">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12 col-sm-3 col logo_section">
+                     <div class="full">
+                        <div class="center-desk">
+                           <div class="logo">
+                              <a href="index.html"><img src="images/icono ventana.png" alt="#" /></a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-10 offset-md-1">
+                     <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarsExample04">
+                           <ul class="navbar-nav mr-auto">
+                              <li class="nav-item active">
+                                 <a class="nav-link" href="index.html">INICIO</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="about.html">ACERCA</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="service.html">SERVICIOS</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="gallery.html">GALERIA</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="testimonial.html">MULTIMEDIA</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="contact.html">CONTACTANOS</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="actualizar.html">PERFIL</a>
+                              </li>
+                           </ul>
+                        </div>
+                     </nav>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+
+      <section class="banner_main">
+         <div id="myCarousel" class="carousel slide banner" data-ride="carousel">
+            <ol class="carousel-indicators">
+               <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+               <li data-target="#myCarousel" data-slide-to="1"></li>
+               <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <div class="carousel-caption relative">
+                        <div class="row">
+                           <div class="col-md-7 offset-md-5">
+                              <div class="text-bg">
+                                 <h1> ABRAZA <br>TU ESPIRITUALIDAD</h1>
+                                 <span>Cuida el exterior tanto como el interior, porque todo es uno.</span>                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <div class="container">
+                     <div class="carousel-caption relative">
+                        <div class="row">
+                           <div class="col-md-7 offset-md-5">
+                              <div class="text-bg">
+                                 <h1> CON<br>EQUILIBRIUM LIFE</h1>
+                                 <span>Mantén tus pies en el suelo, pero deja que tu corazón se eleve tan alto como pueda</span>                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <div class="container">
+                     <div class="carousel-caption relative">
+                        <div class="row">
+                           <div class="col-md-7 offset-md-5">
+                              <div class="text-bg">
+                                 <h1>Y IMPULSA TU <br>CRECIMIENTO PERSONAL</h1>
+                                 <span>Navega ahora con Equilibrium Life y goza.</span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+            <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <span class="sr-only">Next</span>
+            </a>
+         </div>
+      </section>
+      <div class="design">
+         <div class="container-fluid">
+            <div class="row d_flex">
+               <div class="col-md-5">
+                  <div id="design" class="carousel slide banner_design" data-ride="carousel">
+                     <ol class="carousel-indicators">
+                        <li data-target="#design" data-slide-to="0" class="active"></li>
+                        <li data-target="#design" data-slide-to="1"></li>
+                        <li data-target="#design" data-slide-to="2"></li>
+                     </ol>
+                     <div class="carousel-inner">
+                        <div class="carousel-item active">
+                           <div class="container">
+                              <div class="carousel-caption relative">
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <div class="text_de">
+                                          <div class="titlepage">
+                                             <h2>Nuevos <span class="green">momentos</span></h2>
+                                          </div>
+                                          <p>En Equilibrium Life estamos contentos de que seas parte de nuestra comunidad.</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="carousel-item">
+                           <div class="container">
+                              <div class="carousel-caption relative">
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <div class="text_de">
+                                          <div class="titlepage">
+                                             <h2>Nuevo libro para <span class="green">Leer</span></h2>
+                                          </div>
+                                          <p>Ya disponible el link del Libro "<span class="lastBook"></span>" en Multimedia.</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="carousel-item">
+                           <div class="container">
+                              <div class="carousel-caption relative">
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <div class="text_de">
+                                          <div class="titlepage">
+                                             <h2>Mes de <span class="green">Septiembre</span></h2>
+                                          </div>
+                                          <p>Esperamos impulsar tu crecimiento personal, estar presente en tus ayudas y sumar de ti en este Mes.</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <a class="carousel-control-prev" href="#design" role="button" data-slide="prev">
+                     <i class="fa fa-angle-left" aria-hidden="true"></i>
+                     <span class="sr-only">Previous</span>
+                     </a>
+                     <a class="carousel-control-next" href="#design" role="button" data-slide="next">
+                     <i class="fa fa-angle-right" aria-hidden="true"></i>
+                     <span class="sr-only">Next</span>
+                     </a>
+                  </div>
+               </div>
+               <div class="col-md-7 pad_roght0">
+                  <div class="design_img">
+                     <figure><img src="images\Silence is a Safe Place - The Rebelution.jfif" alt="#"/></figure>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="formularioEmocional">
+         <h1>Test de Emociones</h1>
+        <form id="emotionTest">
+            <div class="option-group">
+                <label>1. ¿Cómo te sientes al despertar en las mañanas?</label>
+                <input type="radio" name="q1" value="1"> No tengo ganas de levantarme.<br>
+                <input type="radio" name="q1" value="2"> Me siento neutral, simplemente empiezo el día.<br>
+                <input type="radio" name="q1" value="3"> Me siento emocionado por comenzar el día.
+            </div>
+
+            <div class="option-group">
+                <label>2. ¿Cómo te sientes cuando estás con amigos o familiares?</label>
+                <input type="radio" name="q2" value="1"> Me siento distante y desconectado.<br>
+                <input type="radio" name="q2" value="2"> Me siento bien, pero sin emociones fuertes.<br>
+                <input type="radio" name="q2" value="3"> Me siento feliz y disfruto mucho del momento.
+            </div>
+
+            <div class="option-group">
+                <label>3. ¿Cómo manejas los desafíos o problemas?</label>
+                <input type="radio" name="q3" value="1"> Me siento abrumado y sin motivación.<br>
+                <input type="radio" name="q3" value="2"> Hago lo que puedo, sin mucho entusiasmo.<br>
+                <input type="radio" name="q3" value="3"> Veo los desafíos como oportunidades para crecer.
+            </div>
+
+            <div class="option-group">
+                <label>4. ¿Cómo describirías tu nivel de energía durante el día?</label>
+                <input type="radio" name="q4" value="1"> Me siento cansado y sin energía.<br>
+                <input type="radio" name="q4" value="2"> Tengo energía, pero fluctúa durante el día.<br>
+                <input type="radio" name="q4" value="3"> Me siento lleno de energía y motivado.
+            </div>
+
+            <div class="option-group">
+                <label>5. ¿Cómo te sientes al final del día?</label>
+                <input type="radio" name="q5" value="1"> Me siento insatisfecho y desanimado.<br>
+                <input type="radio" name="q5" value="2"> Me siento neutral, ni bien ni mal.<br>
+                <input type="radio" name="q5" value="3"> Me siento satisfecho y en paz.
+            </div>
+
+            <button type="button" onclick="calculateEmotion()">Enviar</button>
+        </form>
+
+        <div id="result"></div>
+      </div>
+
+      <div  class="latest_news">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="titlepage">
+                     <h2>Lea nuestras <span class="green">últimas noticias</span></h2>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-4 offset-md-2">
+                  <div id="new" class="news_box">
+                     <div class="news_img">
+                        <figure><img src="images\UGZJZJUJNFCKXGYMB4FGX6WTEE.jpg" alt="#"/></figure>
+                     </div>
+                     <div class="news_room">
+                        <span>EQUILIBRIUM LIFE</span>
+                        <h3>El Sena, se integra con Equilibrium Life para apoyar su proyecto.</h3>
+                        <p>Es importante recalcar la importancia de la paz mental, espiritual e interior, EquilibriumLife es apoyado por el Sena este 2024. </p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4 ">
+                  <div id="new" class="news_box">
+                     <div class="news_img mr_le">
+                        <figure><img src="images/imagen_libro.jpg" alt="imagen de nuevo libro"/></figure>
+                     </div>
+                     <div class="news_room">
+                        <span>EQUILIBRIUM LIFE</span>
+                        <h3>Nuevo libro disponible</h3>
+                        <p class="lastBook"></p>
+                     
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12">
+                  <a class="read_more" href="index library.html"> Ver más</a>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div id="contact" class="contact">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="titlepage">
+                     <h2>CONTACTANOS</h2>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-6">
+                  <form id="request" class="main_form formularioFooter">
+                     <div class="row">
+                        <div class="col-md-12 ">
+                           <input class="contactus" placeholder="Nombre" type="text" name="Name" required id="nombreFooter" disabled> 
+                        </div>
+                        <div class="col-md-12">
+                           <input class="contactus" placeholder="Email" type="email" name="Email" required id="emailFooter" disabled> 
+                        </div>
+                        <div class="col-md-12">
+                           <input class="contactus" placeholder="Telefono" type="text" name="Phone_number" required id="numeroFooter">                          
+                        </div>
+                        <div class="col-md-12">
+                           <textarea class="textarea" placeholder="Mensaje" name="Message" required id="mensajeFooter"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                           <button class="send_btn" type="submit" id="enviarFooter">Enviar</button>
+                        </div>
+                        <h2 id="confirmacionFooter" style="color: transparent;">ENVIADO</h2>
+                     </div>
+                  </form>
+               </div>
+               <div class="col-md-6">
+                  <div class="map_main">
+                     <div class="map-responsive">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31739.621564531015!2d-75.6324356!3d6.06952455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4687a66154d5ef%3A0x9cda1a01562a0e8f!2sSena%20la%20salada!5e0!3m2!1ses-419!2sco!4v1720617414390!5m2!1ses-419!2sco" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      
+      <div class="burbuja-chat" onclick="toggleChat()">💬</div>
+      <div class="ventana-chat" id="ventana-chat">
+          <div class="cabecera-chat">Green</div>
+          <div class="contenido-chat" id="contenido-chat">
+              <div class="mensaje-predeterminado respuesta-bot">
+                  Green: ¡Hola! Soy Green, tu asistente virtual. <br><br>
+                  ¿Cuál es tu estado de ánimo? <br>
+                  1. Depresivo <br>
+                  2. Ansioso <br>
+                  3. Desesperado <br>
+                  4. Nostálgico <br>
+                  5. Impulsivo
+              </div>
+          </div>
+          <div class="contenedor-input-chat">
+              <input type="text" id="entrada-usuario" class="input-chat" placeholder="Escribe tu mensaje..." onkeydown="comprobarEnter(event)">
+              <button class="boton-chat" onclick="enviarMensaje()">Enviar</button>
+          </div>
+          <button class="boton-limpiar" onclick="limpiarChat()">Borrar Conversación</button>
+      </div>
+
+
+      <footer>
+         <div class="footer">
+            <div class="container">
+               <div class="row">
+                  <div class=" col-md-3 col-sm-6">
+                     <h3>Para que impulses</h3>
+                     <p class="variat pad_roght2">
+                        tu crecimiento personal,
+                        espiritual y mental,
+                        nunca dudes en EQUILIBRIUM LIFE.
+                     </p>
+                  </div>
+                  <div class=" col-md-3 col-sm-6">
+                     <h3>¿Como podemos ayudarte?</h3>
+                     <p  class="variat pad_roght2">Comunicate con nosotros por 
+                        numero telefonico al +57 312 6058545 o al correo equilibriumlifeparati@gmail.com
+                     </p>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                     <h3>INFORMACION</h3>
+                     <ul class="link_menu">
+                        <li><a href="index.html">INICIO</a></li>
+                        <li><a href="about.html"> ACERCA DE</a></li>
+                        <li><a href="service.html">SERVICIOS</a></li>
+                        <li><a href="gallery.html">GALERIA</a></li>
+                        <li><a href="testimonial.html">MULTIMEDIA</a></li>
+                        <li><a href="contact.html">CONTACTANOS</a></li>
+                     </ul>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                     
+                     <p  class="variat"> EQUILIBRIUM LIFE 2024.</p>
+                  </div>
+               </div>
+            </div>
+            <div class="copyright">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-10 offset-md-1">
+                        <p>© 2024 Todos los derechos reservados.</a></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+
+      <script src="js/jquery.min.js"></script>
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="js/jquery-3.0.0.min.js"></script>
+
+      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="js/custom.js"></script>
+      <script src="login/controlarAcceso.js"></script>
+      <script src="js/mainIndex.js"></script>
+      <script src="js/logicaChatBot.js"></script>
+      <script>
+         function calculateEmotion() {
+            let totalPoints = 0;
+            
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+            const q3 = document.querySelector('input[name="q3"]:checked');
+            const q4 = document.querySelector('input[name="q4"]:checked');
+            const q5 = document.querySelector('input[name="q5"]:checked');
+
+            if (!q1 || !q2 || !q3 || !q4 || !q5) {
+                alert('Por favor, responde todas las preguntas.');
+                return;
+            }
+
+            totalPoints = parseInt(q1.value) + parseInt(q2.value) + parseInt(q3.value) + parseInt(q4.value) + parseInt(q5.value);
+            
+            let emotion = "";
+            if (totalPoints <= 8) {
+                emotion = "Triste";
+            } else if (totalPoints <= 12) {
+                emotion = "Estable";
+            } else {
+                emotion = "Feliz";
+            }
+            
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerText = "Tu estado emocional es: " + emotion;
+            resultDiv.style.display = "block";
+            sessionStorage.setItem("test",0);
+            setTimeout(()=>{
+               let tablaGenero="conteomasculino";
+               if(sessionStorage.getItem("genero")=="Femenino") tablaGenero="conteofemenino";
+               const bodyRequest={table:tablaGenero,emotion:emotion.toLowerCase()};
+               fetch("http://localhost:5000/conteo", {method:"POST",headers:{'Content-Type':"application/json"},body:JSON.stringify(bodyRequest)}).finally(()=>{
+                  window.location.reload();
+               });
+            },2000);
+        }
+      </script>
+   </body>
+</html>

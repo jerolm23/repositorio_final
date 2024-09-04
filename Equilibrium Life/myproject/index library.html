@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LIBROS</title>
+
+    <!--Estilos front-end-->
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="images/icono ventana.png" type="image/gif" />
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/jquery.fancybox.min.css" media="screen">
+    <link rel="stylesheet" href="css/style libreria.css">
+    
+    <!--Customizacion Scroollbar-->
+    <link rel="stylesheet" href="css/scrollbar-colorblue.css">
+    <link rel="stylesheet" href="cssChatBot.css">
+
+    <style>
+       body {
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+          margin: 0;
+       }
+       .content-container {
+          display: flex;
+          flex-grow: 1;
+       }
+       .nav-panel {
+          height: 100%;
+          width: 250px;
+          background-color: #111;
+          padding-top: 20px;
+          flex-shrink: 0;
+       }
+       .nav-panel a {
+          padding: 10px 15px;
+          text-decoration: none;
+          font-size: 18px;
+          color: #818181;
+          display: block;
+       }
+       .nav-panel a:hover {
+          color: #f1f1f1;
+       }
+       .main-content {
+          padding: 20px;
+          width: 100%;
+       }
+       .content-section {
+          display: none;
+       }
+       .libros{
+            display: none;
+       }
+       .listaLibros{
+            list-style: armenian;
+       }
+       .type{
+            font-size: 24px;
+            padding: 3px 35px;
+       }
+       .featured_boks{
+        text-align: center;
+       }
+       #title{
+        margin-top: 50px;
+       }
+       .urlBook{
+        font-size: 22px;
+       }
+       .libros{
+        display: flex;
+        flex-direction: column;
+        
+       }
+       .estadoContainer{
+	      display:flex;
+	      justify-content:space-around;
+         margin-bottom: 20px;
+      }
+      .estadoContainer .estado{
+	      display:flex;
+	      flex-direction:column;
+	      align-items:center;
+         box-shadow: 1px 1px 5px black;
+         border-radius: 5px;
+         padding: 8px;
+      }
+      .estadoContainer .estado:hover{
+         cursor: pointer;
+         opacity: 0.8;
+         box-shadow: 1px 1px 10px black;
+      }
+      .estadoContainer .estado *{
+         font-size: 25px;
+
+      }
+      .librosPersonalizados{
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         font-size: 25px;
+      }
+      .librosPersonalizadosContainer{
+         margin: 20px 0;
+      }
+      .tipoFiltro{
+         font-size: 24px;
+            padding: 3px 35px;
+            display: block;
+      }
+      .librosContainer .filtrar{
+         display: flex;
+         justify-content: center;
+         gap: 20px;
+      }
+      .panelFiltro{
+         display: flex;
+         justify-content: center;
+         gap:100px;
+         display: none;
+      }
+      .panelFiltroItem{
+         text-align: center;
+         box-shadow: 2px 2px 10px black;
+         padding: 10px;
+         border-radius: 8px;
+      }
+      .panelFiltroItem *{
+         font-size: 22px;
+      }
+      .panelFiltroItem:hover{
+         cursor: pointer;
+         opacity: 0.8;
+      }
+      .resultadoFiltro{
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         font-size: 24px;
+         margin-bottom: 20px;
+      }
+    </style>
+    
+</head>
+<body>
+    <header>
+        <div class="header">
+           <div class="container">
+              <div class="row">
+                 <div class="col-md-12 col-sm-3 col logo_section">
+                    <div class="full">
+                       <div class="center-desk">
+                          <div class="logo">
+                             <a href="index.html"><img src="images/icono ventana.png" alt="#" /></a>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="col-md-10 offset-md-1">
+                    <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                       <span class="navbar-toggler-icon"></span>
+                       </button>
+                       <div class="collapse navbar-collapse" id="navbarsExample04">
+                          <ul class="navbar-nav mr-auto">
+                             <li class="nav-item active">
+                                <a class="nav-link" href="index.html">INICIO</a>
+                             </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="about.html">ACERCA</a>
+                             </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="service.html">SERVICIOS</a>
+                             </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="gallery.html">GALERIA</a>
+                             </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="testimonial.html">MULTIMEDIA</a>
+                             </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="contact.html">CONTACTANOS</a>
+                             </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="actualizar.html">PERFIL</a>
+                             </li>
+                          </ul>
+                       </div>
+                    </nav>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </header>
+    <!--About-->
+
+    <div class="about">
+
+        <div class="about_image">
+            <img src="images/about.png">
+        </div>
+        <div class="about_tag">
+            <h1>Acerca de la libreria</h1>
+            <p>
+                Bienvenidos a nuestra Librería, un espacio dedicado a nutrir el espíritu y la mente. Nos especializamos en ofrecer una selección
+                 curada de libros espirituales y emocionales, diseñados para guiar a nuestros lectores en su viaje de autodescubrimiento y 
+                 crecimiento personal.
+                 En nuestra librería, encontrarás una amplia gama de títulos que abarcan diversas áreas del desarrollo personal y espiritual, incluyendo:
+                crecimiento personal
+                crecimiento mental
+                crecimiento espiritual.
+            </p>
+           
+        </div>
+
+    </div>
+
+
+
+
+
+    <!--Books-->
+
+   <div class="librosContainer">
+      <div class="filtrar">
+         <button class="tipoFiltro" type="button" data-key="espiritual">Espiritual</button>
+         <button class="tipoFiltro" type="button" data-key="mental">Mental</button>
+         <button class="tipoFiltro" type="button" data-key="personal">Personal</button>
+      </div>
+      <h1 class="title"></h1>
+      <div class="resultadoFiltro">
+         
+      </div>
+      <div class="panelFiltro">
+      
+         <div class="panelFiltroItem" data-key="1">
+            <p data-key="1">😔</p><h3 data-key="1">Triste</h3>
+         </div>
+         <div class="panelFiltroItem" data-key="2">
+            <p data-key="2">😐</p><h3 data-key="2">Estable</h3>
+         </div>
+         <div class="panelFiltroItem" data-key="3">
+            <p data-key="3">😄</p><h3 data-key="3">Feliz</h3>
+         </div>
+      </div>
+   </div>
+
+   <div class="burbuja-chat" onclick="toggleChat()">💬</div>
+      <div class="ventana-chat" id="ventana-chat">
+          <div class="cabecera-chat">Green</div>
+          <div class="contenido-chat" id="contenido-chat">
+              <div class="mensaje-predeterminado respuesta-bot">
+                  Green: ¡Hola! Soy Green, tu asistente virtual. <br><br>
+                  ¿Cuál es tu estado de ánimo? <br>
+                  1. Depresivo <br>
+                  2. Ansioso <br>
+                  3. Desesperado <br>
+                  4. Nostálgico <br>
+                  5. Impulsivo
+              </div>
+          </div>
+          <div class="contenedor-input-chat">
+              <input type="text" id="entrada-usuario" class="input-chat" placeholder="Escribe tu mensaje..." onkeydown="comprobarEnter(event)">
+              <button class="boton-chat" onclick="enviarMensaje()">Enviar</button>
+          </div>
+          <button class="boton-limpiar" onclick="limpiarChat()">Borrar Conversación</button>
+      </div>
+
+    <footer>
+        <div class="footer">
+           <div class="container">
+              <div class="row">
+                 <div class=" col-md-3 col-sm-6">
+                    <h3>Para que impulses</h3>
+                    <p class="variat pad_roght2">
+                       tu crecimiento personal,
+                       espiritual y mental,
+                       nunca dudes en EQUILIBRIUM LIFE.
+                    </p>
+                 </div>
+                 <div class=" col-md-3 col-sm-6">
+                    <h3>¿Como podemos ayudarte?</h3>
+                    <p  class="variat pad_roght2">Comunicate con nosotros por 
+                       numero telefonico al +57 312 6058545 o al correo equilibriumlifeparati@gmail.com
+                    </p>
+                 </div>
+                 <div class="col-md-3 col-sm-6">
+                    <h3>INFORMACION</h3>
+                    <ul class="link_menu">
+                       <li><a href="index.html">INICIO</a></li>
+                       <li><a href="about.html"> ACERCA DE</a></li>
+                       <li><a href="service.html">SERVICIOS</a></li>
+                       <li><a href="gallery.html">GALERIA</a></li>
+                       <li><a href="testimonial.html">MULTIMEDIA</a></li>
+                       <li><a href="template/contact.html">CONTACTANOS</a></li>
+                    </ul>
+                 </div>
+                 <div class="col-md-3 col-sm-6">
+                    
+                    <p  class="variat"> EQUILIBRIUM LIFE 2024.</p>
+                 </div>
+              </div>
+           </div>
+           <div class="copyright">
+              <div class="container">
+                 <div class="row">
+                    <div class="col-md-10 offset-md-1">
+                       <p>© 2024 Todos los derechos reservados.</a></p>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </footer>
+  
+     <script src="js/jquery.min.js"></script>
+     <script src="js/bootstrap.bundle.min.js"></script>
+     <script src="js/jquery-3.0.0.min.js"></script>
+     <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+     <script src="js/custom.js"></script>
+     <script>
+        
+        $(document).ready(function(){
+            const findBooksByType=(type,all)=>{
+               return all.map(val=>{
+                  if(val[2]==type) return val[0];
+               });
+            };
+            const exitsMatch=(arr)=>{
+               for(let p=0;p<arr.length;p++){
+                  if(arr[p]!=undefined)return true;
+               }
+               return false;
+            }
+            const findBooksByState=(type,state,all)=>{
+               return all.map(val=>{
+                  if(val[2]==type&&val[1]==state) return val[0];
+               });
+            };
+            const showBooks=(everything)=>{
+               let dad=document.querySelector(".resultadoFiltro");
+               dad.innerHTML="";
+               everything.forEach(el=>{
+                        if(el!=undefined){
+                           let a=document.createElement("a");
+                           a.textContent=el.replaceAll(".pdf","").replaceAll(".PDF","").replaceAll("_"," ");
+                           a.href="http://localhost:5000/static/libros/"+el;
+                           a.target="_blank";
+                           dad.appendChild(a);
+                        }
+                     });
+            };
+            let current=null;
+            fetch("http://localhost:5000/cargarTodosLibros").then(res=>{
+               res.json().then(bd=>{
+                  $(".panelFiltroItem").click(function(e){
+                     showBooks(findBooksByState(current,e.target.dataset.key,bd));
+                  });
+                  $(".tipoFiltro").click(function(e){
+                     $(".panelFiltro").css("display","none");
+                     let books=findBooksByType(e.target.dataset.key,bd);
+                     current=e.target.dataset.key;
+                     showBooks(books);
+                     $(".panelFiltro").css("display",!exitsMatch(books)?"none":"flex");
+                  });
+               });
+            });
+        });
+
+     </script>
+     <script src="js/logicaChatBot.js"></script>
+</body>
+</html>
